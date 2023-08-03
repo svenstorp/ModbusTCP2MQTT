@@ -91,6 +91,10 @@ sensors.append({'name': "Daily Generation", 'sensor_type': "sensor",
 'register': "daily_power_yields", 'dev_class': "energy",
 'state_class': "total_increasing"})
 
+sensors.append({'name': "Total Generation", 'sensor_type': "sensor",
+'register': "total_power_yields", 'dev_class': "energy",
+'state_class': "total_increasing"})
+
 sensors.append({'name': "Active Power", 'sensor_type': "sensor",
 'register': "total_active_power", 'dev_class': "power",
 'state_class': "measurement"})

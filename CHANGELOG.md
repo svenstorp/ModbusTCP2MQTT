@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.9
+- Fix build issues due to old deps
+- Add "Total Generation" to basic sensors
+
 ## 0.3.3.1
 - Update to Sungather July-8 commit
 
