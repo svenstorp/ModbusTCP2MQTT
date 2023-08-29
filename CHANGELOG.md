@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.10
+- Set proper level of "Total Generation"
+- 0xFFFF should be an error (== value missing, setting to 0 does not make sense)
+
 ## 0.3.9
 - Fix build issues due to old deps
 - Add "Total Generation" to basic sensors

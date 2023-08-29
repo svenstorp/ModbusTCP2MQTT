@@ -201,6 +201,7 @@ class SungrowInverter():
                 if register_type == register['type'] and register['address'] == run:
                     register_name = register['name']
 
+                    register_value_valid = True
                     register_value = rr.registers[num]
 
                     # Convert unsigned to signed
@@ -213,19 +214,19 @@ class SungrowInverter():
                             register_value = 1 if register_value & register.get('mask') != 0 else 0
                     elif register.get('datatype') == "S16":
                         if register_value == 0xFFFF or register_value == 0x7FFF:
-                            register_value = 0
+                            register_value_valid = False
                         if register_value >= 32767:  # Anything greater than 32767 is a negative for 16bit
                             register_value = (register_value - 65536)
                     elif register.get('datatype') == "U32":
                         u32_value = rr.registers[num+1]
                         if register_value == 0xFFFF and u32_value == 0xFFFF:
-                            register_value = 0
+                            register_value_valid = False
                         else:
                             register_value = (register_value + u32_value * 0x10000)
                     elif register.get('datatype') == "S32":
                         u32_value = rr.registers[num+1]
                         if register_value == 0xFFFF and (u32_value == 0xFFFF or u32_value == 0x7FFF):
-                            register_value = 0
+                            register_value_valid = False
                         elif u32_value >= 32767:  # Anything greater than 32767 is a negative
                             register_value = (register_value + u32_value * 0x10000 - 0xffffffff -1)
                         else:
@@ -239,11 +240,12 @@ class SungrowInverter():
 
 
 
-                    if register.get('accuracy'):
+                    if register.get('accuracy') and register_value_valid:
                         register_value = round(register_value * register.get('accuracy'),2)
 
-                    # Set the final register value with adjustments above included 
-                    self.latest_scrape[register_name] = register_value
+                    # Set the final register value with adjustments above included
+                    if register_value_valid:
+                        self.latest_scrape[register_name] = register_value
         return True
 
     def validateRegister(self, check_register):

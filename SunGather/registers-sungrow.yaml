@@ -728,7 +728,7 @@ registers:
 #   - name: "Reserved"    
 #     address: 5143
     - name: "total_power_yields"    
-      level: 1
+      level: 0
       address: 5144
       datatype: "U32"
       accuracy: 0.1
