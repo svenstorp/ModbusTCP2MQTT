@@ -8,8 +8,10 @@ ARG BUILD_ARCH
 
 
 COPY requirements.txt ./
+COPY custom_packets/SungrowModbusWebClient-0.3.3.tar.gz ./
 RUN apk add --no-cache python3-dev py3-pip g++
 RUN pip install --upgrade pycryptodomex==3.11.0 --no-cache-dir -r requirements.txt
+RUN pip install SungrowModbusWebClient-0.3.3.tar.gz
 
 COPY SunGather/ /
 RUN true

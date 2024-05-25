@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.11
+- Use local version of SungrowModbusWebClient with login (needed after inverter upgrade)
+
 ## 0.3.10
 - Set proper level of "Total Generation"
 - 0xFFFF should be an error (== value missing, setting to 0 does not make sense)
