@@ -32,7 +32,7 @@
 
     "Scan_interval": "int(10,600)",
     "Scan_timeout": "int(3,60)",
-    "Log_level": "bool?",
-    "warn_for_low_space": "list(INFO|WARNING|ERROR|DEBUG)"
+    "Log_level": "list(INFO|WARNING|ERROR|DEBUG)",
+    "warn_for_low_space": "bool?"
   }
 }
