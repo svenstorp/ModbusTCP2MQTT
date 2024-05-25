@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.12
+- Fix Paho V1 API
+
 ## 0.3.11
 - Use local version of SungrowModbusWebClient with login (needed after inverter upgrade)
 

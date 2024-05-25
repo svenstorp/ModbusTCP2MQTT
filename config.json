@@ -1,6 +1,6 @@
 {
   "name": "ModbusTCP2MQTT",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "slug": "modbus_inverter",
   "description": "Sungrow/SMA inverter Modbus Data Fetcher",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],

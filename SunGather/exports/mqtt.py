@@ -29,7 +29,7 @@ class export_mqtt(object):
             logging.info(f"MQTT: Host config is required")
             return False
         client_id = self.mqtt_config['client_id']
-        self.mqtt_client = mqtt.Client(client_id)
+        self.mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id)
         self.mqtt_client.on_connect = self.on_connect
         self.mqtt_client.on_disconnect = self.on_disconnect
         self.mqtt_client.on_publish = self.on_publish
@@ -39,7 +39,7 @@ class export_mqtt(object):
 
         if self.mqtt_config['port'] == 8883:
             self.mqtt_client.tls_set()
-        
+
         self.mqtt_client.connect_async(self.mqtt_config['host'], port=self.mqtt_config['port'], keepalive=60)
         self.mqtt_client.loop_start()
 
@@ -50,7 +50,7 @@ class export_mqtt(object):
                     return False
                 else:
                     self.ha_sensors.append(ha_sensor)
-    
+
         return True
 
     def on_connect(self, client, userdata, flags, rc):
@@ -58,7 +58,7 @@ class export_mqtt(object):
 
     def on_disconnect(self, client, userdata, rc):
         logging.info(f"MQTT: Server Disconnected code: {rc}")
-    
+
     def on_publish(self, client, userdata, mid):
         try:
             self.mqtt_queue.remove(mid)
@@ -77,7 +77,7 @@ class export_mqtt(object):
             logging.warning(f'MQTT: Server Error; Server not configured')
             return False
         # qos=0 is set, so no acknowledgment is sent, rending this check useless
-        #elif self.mqtt_queue.__len__() > 10:
+        # elif self.mqtt_queue.__len__() > 10:
         #    logging.warning(f'MQTT: {self.mqtt_queue.__len__()} messages queued, this may be due to a MQTT server issue')
 
         logging.debug(f"MQTT: Publishing: {self.mqtt_config['topic']} : {json.dumps(inverter.latest_scrape)}")
